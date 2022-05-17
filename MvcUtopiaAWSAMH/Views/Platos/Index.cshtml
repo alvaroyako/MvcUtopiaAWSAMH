@@ -1,0 +1,145 @@
+﻿@model List<Plato>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+
+    <title> Utopia </title>
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="https://storageproyectoamh.blob.core.windows.net/misc/hero-bg.jpg" />
+        </div>
+
+    </div>
+    <br />
+    <!-- Seccion de comida -->
+    <section class="food_section layout_padding-bottom" id="comida">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>
+                    Nuestra Carta
+                </h2>
+            </div>
+
+            <ul class="filters_menu">
+                <li class="active" data-filter="*">Todo</li>
+                <li data-filter=".aperitivos">Aperitivos</li>
+                <li data-filter=".principales">Platos principales</li>
+                <li data-filter=".postres">Postres</li>
+            </ul>
+
+            <div class="filters-content" id="comida">
+                <div class="row grid">
+                    @foreach (Plato plato in Model)
+                    {
+
+                        @switch (@plato.Categoria)
+                        {
+                            case "Aperitivo":
+                                <div class="col-sm-6 col-lg-4 all aperitivos">
+                                    <div class="box">
+                                        <div>
+                                            <div class="img-box">
+                                                <img src="https://storageproyectoamh.blob.core.windows.net/platos/@plato.Foto" alt="">
+                                            </div>
+                                            <div class="detail-box">
+                                                <h5>
+                                                    @plato.Nombre
+                                                </h5>
+                                                <p>
+                                                    @plato.Descripcion
+                                                </p>
+                                                <div class="options">
+                                                    <h6>
+                                                        @plato.Precio &euro;
+                                                    </h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                break;
+
+                            case "Plato Principal":
+                                <div class="col-sm-6 col-lg-4 all principales">
+                                    <div class="box">
+                                        <div>
+                                            <div class="img-box">
+                                                <img src="https://storageproyectoamh.blob.core.windows.net/platos/@plato.Foto" alt="">
+                                            </div>
+                                            <div class="detail-box">
+                                                <h5>
+                                                    @plato.Nombre
+                                                </h5>
+                                                <p>
+                                                    @plato.Descripcion
+                                                </p>
+                                                <div class="options">
+                                                    <h6>
+                                                        @plato.Precio &euro;
+                                                    </h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                break;
+
+                            case "Postres y batidos":
+                                <div class="col-sm-6 col-lg-4 all postres">
+                                    <div class="box">
+                                        <div>
+                                            <div class="img-box">
+                                                <img src="https://storageproyectoamh.blob.core.windows.net/platos/@plato.Foto" alt="">
+                                            </div>
+                                            <div class="detail-box">
+                                                <h5>
+                                                    @plato.Nombre
+                                                </h5>
+                                                <p>
+                                                    @plato.Descripcion
+                                                </p>
+                                                <div class="options">
+                                                    <h6>
+                                                        @plato.Precio &euro;
+                                                    </h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                break;
+
+                        }
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- fin de seccion de comida -->
+
+
+</body>
+
+</html>

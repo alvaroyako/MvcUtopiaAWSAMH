@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+
+    <title> Utopia </title>
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="https://storageproyectoamh.blob.core.windows.net/misc/hero-bg.jpg" />
+        </div>
+    </div>
+
+    <!-- seccion reserva-->
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Reserva una mesa
+                </h2>
+            </div>
+            @Html.Raw(ViewData["CORREO"])
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        <form method="post">
+                            <div>
+                                <input name="nombre" required type="text" class="form-control" placeholder="Tu nombre" />
+                            </div>
+                            <div>
+                                <input name="telefono" required type="text" class="form-control" placeholder="Teléfono de contacto" />
+                            </div>
+                            <div>
+                                <input name="email" required type="email" class="form-control" placeholder="Email" />
+                            </div>
+                            <div>
+                                <select name="personas" required class="form-control nice-select wide">
+                                    <option value="" disabled selected>
+                                        Número de asistentes
+                                    </option>
+                                    <option value="2">
+                                        2
+                                    </option>
+                                    <option value="3">
+                                        3
+                                    </option>
+                                    <option value="4">
+                                        4
+                                    </option>
+                                    <option value="5">
+                                        5
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <input name="fecha" required type="datetime-local" class="form-control">
+                            </div>
+                            <div class="btn_box">
+                                <button type="submit">
+                                    Reservar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="map_container ">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3034.6623692806174!2d-3.7169593843683444!3d40.482733859546194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42299039176071%3A0xac75819079048769!2sC%2F%20de%20%C3%9Abeda%2C%2028034%20Madrid!5e0!3m2!1ses!2ses!4v1644839264705!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- fin seccion reserva -->
+    <br />
+    <br />
+
+</body>
+
+</html>

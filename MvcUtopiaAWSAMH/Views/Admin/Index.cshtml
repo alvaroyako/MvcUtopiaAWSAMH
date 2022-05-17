@@ -1,0 +1,203 @@
+﻿@model List<Reserva>
+
+@{
+    List<Juego> juegos = ViewData["JUEGOS"] as List<Juego>;
+    List<Plato> platos = ViewData["PLATOS"] as List<Plato>;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+
+    <title> Utopia </title>
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="https://storageproyectoamh.blob.core.windows.net/misc/hero-bg.jpg" />
+        </div>
+    </div>
+
+    <br />
+    <div class="container text-center">
+
+        <ul class="list-group list-group-horizontal" style="display: flex; justify-content: center; ">
+            <li class="list-group-item"><a href="#platos">Administracion de platos</a></li>
+            <li class="list-group-item"><a href="#juegos">Administracion de juegos</a></li>
+            <li class="list-group-item"><a href="#reservas">Administracion de reservas</a></li>
+        </ul>
+        <br />
+
+        @* section Platos *@
+        <a name="platos"><h1>Administracion de platos</h1></a>
+
+
+        <table class="table text-center" style="background-color: #222831; color:white">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Foto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Plato plato in platos)
+                {
+                    <tr>
+                        <td>@plato.IdPlato</td>
+                        <td>@plato.Nombre</td>
+                        <td>@plato.Descripcion</td>
+                        <td>@plato.Categoria</td>
+                        <td>@plato.Precio &euro;</td>
+                        <td>
+                            <img src="https://storageproyectoamh.blob.core.windows.net/platos/@plato.Foto" style="width:100px;height:100px" />
+                        </td>
+                        <td>
+                            <a class="btn btn-info" asp-action="EditarPlato" asp-controller="Platos" asp-route-idplato="@plato.IdPlato">Editar</a>
+                            <br />
+                            <br />
+                            <a onclick="AlertDeleteData('@plato.IdPlato', 'Platos', 'DeletePlato', 'idplato')" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="7"><a asp-controller="Platos" asp-action="CrearPlato" style="margin:0 auto" class="btn btn-success">Crear Plato</a></td>
+                </tr>
+            </tbody>
+        </table>
+        @* section Platos *@
+
+        <hr />
+
+        @* section Juegos *@
+        <a name="juegos"><h1>Administracion de juegos</h1></a>
+
+        <table class="table text-center" style="background-color: #222831; color:white">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Foto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Juego juego in juegos)
+                {
+                    <tr>
+                        <td>@juego.IdJuego</td>
+                        <td>@juego.Nombre</td>
+                        <td>@juego.Descripcion</td>
+                        <td>@juego.Categoria</td>
+                        <td>@juego.Precio &euro;</td>
+                        <td>
+                            <img src="https://storageproyectoamh.blob.core.windows.net/juegos/@juego.Foto" style="width:100px;height:100px" />
+                        </td>
+                        <td>
+                            <a class="btn btn-info" asp-action="EditarJuego" asp-controller="Juegos" asp-route-idjuego="@juego.IdJuego">Editar</a>
+                            <br />
+                            <br />
+                            <a onclick="AlertDeleteData('@juego.IdJuego', 'Juegos', 'DeleteJuego', 'idjuego')" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="7"><a asp-controller="Juegos" asp-action="CrearJuego" style="margin:0 auto" class="btn btn-success">Crear Juego</a></td>
+                </tr>
+            </tbody>
+        </table>
+        @* section Juegos *@
+
+        <hr />
+
+        @* section Reservas *@
+        <a name="reservas"><h1>Administracion de reservas</h1></a>
+
+        <table class="table text-center" style="background-color: #222831; color:white">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Personas</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Reserva reserva in Model)
+                {
+                    <tr>
+                        <td>@reserva.Nombre</td>
+                        <td>@reserva.Telefono</td>
+                        <td>@reserva.Email</td>
+                        <td>@reserva.Personas</td>
+                        <td>@reserva.Fecha</td>
+                        <td>@reserva.Hora</td>
+                        <td>
+                            <a class="btn btn-info" asp-action="EditarReserva" asp-controller="Reservas" asp-route-nombre="@reserva.Nombre">Editar</a>
+                            <br />
+                            <br />
+                            <a onclick="AlertDeleteData('@reserva.Nombre','Reservas','DeleteReserva','nombre')" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="7"><a asp-controller="Reservas" asp-action="CrearReserva" style="margin:0 auto" class="btn btn-success">Crear Reserva</a></td>
+                </tr>
+            </tbody>
+        </table>
+        @* section Reservas *@
+
+    </div>
+
+
+    @* Script para mostrar sweetalert antes de borrar registro *@
+    <script>
+        function AlertDeleteData(identificador,controller,action,param) {
+            Swal.fire({
+                title: '¿Está seguro de que desea eliminar?',
+                text: "Esta acción no podrá revertirse",
+                icon: 'error',
+                buttons: true,
+                showCancelButton: true,
+                dangerMode: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/"+controller+"/"+action+"?"+param+"="+identificador,
+                        success: function (r) {
+                            window.location = "/Admin/Index";
+                        }
+                    });
+                }
+                return false;
+            });
+        }
+    </script>
+
+</body>
+
+</html>

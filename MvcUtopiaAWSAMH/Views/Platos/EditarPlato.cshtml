@@ -1,0 +1,50 @@
+﻿@model Plato
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+
+    <title> Utopia </title>
+
+</head>
+
+<body class="sub_page">
+    <br />
+    <div style="margin:0 auto;width:20em" class="text-center">
+        <form method="post" enctype="multipart/form-data">
+            <input hidden value="@Model.IdPlato" class="form-control" type="number" name="idplato" />
+            <br />
+            <label>Nombre</label>
+            <input required class="form-control" type="text" placeholder="@Model.Nombre" name="nombre" />
+            <br />
+            <label>Descripcion</label>
+            <input required class="form-control" type="text" placeholder="@Model.Descripcion" name="descripcion" />
+            <br />
+            <label>Categoria</label>
+            <input required class="form-control" type="text" placeholder="@Model.Categoria" name="categoria" />
+            <br />
+            <label>Precio</label>
+            <input required class="form-control" type="number" placeholder="@Model.Precio" name="precio" />
+            <br />
+            <input type="text" hidden value="@Model.Foto" name="foto" />
+            <label>Foto</label>
+            <input required class="form-control" type="file" name="archivo" />
+            <br />
+            <button type="submit" class="btn btn-success">Editar Plato</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

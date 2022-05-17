@@ -1,0 +1,62 @@
+﻿@model Reserva
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/images/favicon.png" type="">
+
+    <title> Utopia </title>
+
+</head>
+
+<body class="sub_page">
+    <br />
+    <div style="margin:0 auto;width:20em" class="text-center">
+        <form method="post">
+            <input hidden class="form-control" value="@Model.Nombre" type="text" name="nombre" />
+            <br />
+            <label>Telefono</label>
+            <input required class="form-control" type="text" name="telefono" placeholder="@Model.Telefono" />
+            <br />
+            <label>Email</label>
+            <input required class="form-control" type="email" name="email" placeholder="@Model.Email" />
+            <br />
+            <label>Personas</label>
+            <select required name="personas" class="form-control nice-select wide" placeholder="@Model.Personas">
+                <option value="" disabled selected>
+                    Número de asistentes
+                </option>
+                <option value="2">
+                    2
+                </option>
+                <option value="3">
+                    3
+                </option>
+                <option value="4">
+                    4
+                </option>
+                <option value="5">
+                    5
+                </option>
+            </select>
+            <br />
+            <label>Fecha</label>
+            <input required class="form-control" type="datetime-local" name="fecha" placeholder="@Model.Fecha" />
+            <br />
+            <button type="submit" class="btn btn-success">Editar reserva</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

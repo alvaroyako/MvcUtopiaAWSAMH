@@ -1,0 +1,48 @@
+﻿@model List<Juego>
+
+@if (Model == null)
+{
+    <div class="container text-center" style="margin:0 auto 30em">
+        <h1 class="text-danger">Aun no has marcado como favorito ningun juego</h1>
+        <h2>Echale un vistazo a nuestros juegos <a asp-action="Index" asp-controller="Juegos">clicando aquí</a></h2>
+    </div>
+}
+else
+{
+    <div class="container text-center">
+        <div style="margin: 0 auto">
+            <h1>Favoritos</h1>
+            <br />
+            <table class="table text-center" style="background-color: #222831; color:white">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>Foto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Juego juego in Model)
+                    {
+                        <tr>
+                            <td>@juego.Nombre</td>
+                            <td>@juego.Descripcion</td>
+                            <td>@juego.Categoria</td>
+                            <td>@juego.Precio &euro;</td>
+                            <td>
+                                <img src="https://storageproyectoamh.blob.core.windows.net/juegos/@juego.Foto" style="width:100px;height:100px" />
+                            </td>
+                            <td>
+                                <a asp-action="EliminarFavorito" asp-route-idjuego="@juego.IdJuego" asp-controller="Juegos" class="btn btn-danger">Borrar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+    </div>
+}

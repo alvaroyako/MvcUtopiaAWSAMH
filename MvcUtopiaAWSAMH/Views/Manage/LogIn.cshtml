@@ -1,0 +1,43 @@
+﻿<style>
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #222831;
+        max-width: 360px;
+        margin: 0 auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        color: white;
+    }
+
+    .login-page {
+        width: 360px;
+        padding: 8% 0 0;
+        margin: auto;
+    }
+</style>
+
+<div class="login-page">
+    <div class="form">
+        <h1>Iniciar sesión</h1>
+        <hr />
+        <form method="post">
+            <label>Email</label>
+            <input required type="email" name="email" class="form-control" />
+            <br />
+            <label>Password</label>
+            <input required type="password" name="password" class="form-control" />
+            <br />
+            <button type="submit" class="btn" style="background-color: #ffbe33;color:white">Iniciar sesión</button>
+            <br />
+            <br />
+            <button type="reset" class="btn btn-danger" style="color:white">Rehacer</button>
+            <p style="color:red">
+                @ViewData["MENSAJE"]
+            </p>
+            <hr />
+            <span>Si no estas registrado, registrate <a asp-action="Register" asp-controller="Manage">clicando aquí</a> </span>
+        </form>
+    </div>
+</div>
