@@ -32,11 +32,11 @@ namespace MvcUtopiaAWSAMH.Services
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(this.UrlApi);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    HttpResponseMessage response =
-                    await client.GetAsync(request);
+                string url = this.UrlApi + request;
+                HttpResponseMessage response =
+                    await client.GetAsync(url);
                     if (response.IsSuccessStatusCode)
                     {
                         T data = await response.Content.ReadAsAsync<T>();
@@ -54,11 +54,11 @@ namespace MvcUtopiaAWSAMH.Services
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
-                    HttpResponseMessage response = await client.GetAsync(request);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                string url = this.UrlApi + request;
+                HttpResponseMessage response = await client.GetAsync(url);
                     if (response.IsSuccessStatusCode)
                     {
                         T data = await response.Content.ReadAsAsync<T>();
@@ -77,9 +77,8 @@ namespace MvcUtopiaAWSAMH.Services
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
                     LoginModel model = new LoginModel
                     {
                         Email = email,
@@ -88,7 +87,8 @@ namespace MvcUtopiaAWSAMH.Services
                     string json = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                     string request = "/auth/login";
-                    HttpResponseMessage response = await client.PostAsync(request, content);
+                string url = this.UrlApi + request;
+                HttpResponseMessage response = await client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {
                         string data = await response.Content.ReadAsStringAsync();
@@ -109,12 +109,11 @@ namespace MvcUtopiaAWSAMH.Services
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string request = "/usuarios/registrarusuario";
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-
-                    Usuario usu = new Usuario();
+                  string request = "/usuarios/registrarusuario";
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                string url = this.UrlApi + request;
+                Usuario usu = new Usuario();
                     usu.IdUsuario = 0;
                     usu.Nombre = nombre;
                     usu.Email = email;
@@ -126,7 +125,7 @@ namespace MvcUtopiaAWSAMH.Services
 
                     string json = JsonConvert.SerializeObject(usu);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync(request, content);
+                    HttpResponseMessage response = await client.PostAsync(url, content);
                 }
                 return idusu;
             }
@@ -161,11 +160,13 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/juegos/crearjuego";
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
-                    Juego j = new Juego();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+
+                string url = this.UrlApi + request;
+                Juego j = new Juego();
                     j.IdJuego = juego.IdJuego;
                     j.Nombre = juego.Nombre;
                     j.Descripcion = juego.Descripcion;
@@ -175,7 +176,7 @@ namespace MvcUtopiaAWSAMH.Services
 
                     string json = JsonConvert.SerializeObject(j);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync(request, content);
+                    HttpResponseMessage response = await client.PostAsync(url, content);
                 }
             }
 
@@ -184,11 +185,12 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/juegos/updatejuego";
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
-                    Juego j = new Juego();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+
+                string url = this.UrlApi + request;
+                Juego j = new Juego();
                     j.IdJuego = juego.IdJuego;
                     j.Nombre = juego.Nombre;
                     j.Descripcion = juego.Descripcion;
@@ -198,7 +200,7 @@ namespace MvcUtopiaAWSAMH.Services
 
                     string json = JsonConvert.SerializeObject(j);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PutAsync(request, content);
+                    HttpResponseMessage response = await client.PutAsync(url, content);
                 }
             }
 
@@ -207,11 +209,12 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/juegos/DeleteJuego/" + idjuego;
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
-                    HttpResponseMessage response = await client.DeleteAsync(request);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                string url = this.UrlApi + request;
+                HttpResponseMessage response = await client.DeleteAsync(request);
+
                 }
             }
 
@@ -237,10 +240,10 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/platos/crearplato";
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                string url = this.UrlApi + request;
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                     Plato p = new Plato();
                     p.IdPlato = plato.IdPlato;
                     p.Nombre = plato.Nombre;
@@ -260,10 +263,10 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/platos/updateplato";
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                string url = this.UrlApi + request;
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                     Plato p = new Plato();
                     p.IdPlato = plato.IdPlato;
                     p.Nombre = plato.Nombre;
@@ -283,10 +286,10 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/platos/DeletePlato/" + idplato;
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                string url = this.UrlApi + request;
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                     HttpResponseMessage response = await client.DeleteAsync(request);
                 }
             }
@@ -374,10 +377,10 @@ namespace MvcUtopiaAWSAMH.Services
                 using (HttpClient client = new HttpClient())
                 {
                     string request = "/compras/createcompra";
-                    client.BaseAddress = new Uri(this.UrlApi);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                string url = this.UrlApi + request;
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
                     Compra c = new Compra();
                     c.IdCompra = compra.IdCompra;
                     c.IdUsuario = compra.IdUsuario;
@@ -495,9 +498,9 @@ namespace MvcUtopiaAWSAMH.Services
                 string urlMail = "https://prod-28.westeurope.logic.azure.com:443/workflows/7d3ad3e4bdeb4900b2cfb03f9dc4d18b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YGTVz82lGFbkD_zNKHFO028sOGV4dEylzrIIlSaFLo4";
                 using (HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    EmailModel emailModel = new EmailModel
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                EmailModel emailModel = new EmailModel
                     {
                         Email = email,
                         Asunto = subject,
