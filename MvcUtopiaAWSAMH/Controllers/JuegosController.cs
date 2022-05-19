@@ -23,7 +23,9 @@ namespace MvcUtopiaAWSAMH.Controllers
         public async Task<IActionResult> Index()
         {
             List<Juego> juegos = await this.service.GetJuegosAsync();
+            HttpContext.Session.GetString("PRUEBA");
             return View(juegos);
+           
         }
 
         [AuthorizeUsuarios(Policy = "AdminOnly")]

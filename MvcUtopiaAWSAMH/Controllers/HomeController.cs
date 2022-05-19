@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MvcUtopiaAWSAMH.Filters;
 using MvcUtopiaAWSAMH.Services;
 using NugetUtopia;
@@ -27,7 +28,9 @@ namespace MvcUtopiaAWSAMH.Controllers
         public async Task<IActionResult> Index()
         {
             List<Juego> juegos = await this.service.GetJuegosAsync();
+            HttpContext.Session.SetString("PRUEBA", "hola probando");
             return View(juegos);
+            
         }
 
         public IActionResult SobreNosotros()
