@@ -28,10 +28,10 @@ namespace MvcUtopiaAWSAMH
             string urlApi = this.Configuration.GetValue<string>("ApiUrls:ApiUtopia");
             string CadenaCache = this.Configuration.GetConnectionString("CacheRedis");
 
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = CadenaCache;
-            });
+            //services.AddStackExchangeRedisCache(options =>
+            //{
+            //    options.Configuration = CadenaCache;
+            //});
 
             services.AddAuthorization(options =>
             {
