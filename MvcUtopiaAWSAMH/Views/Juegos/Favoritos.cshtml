@@ -33,7 +33,7 @@ else
                             <td>@juego.Categoria</td>
                             <td>@juego.Precio &euro;</td>
                             <td>
-                                <img src="https://storageproyectoamh.blob.core.windows.net/juegos/@juego.Foto" style="width:100px;height:100px" />
+                                <img src="https://bucket-utopia-amh.s3.amazonaws.com/images/juegos/@juego.Foto" style="width:100px;height:100px" />
                             </td>
                             <td>
                                 <a asp-action="EliminarFavorito" asp-route-idjuego="@juego.IdJuego" asp-controller="Juegos" class="btn btn-danger">Borrar</a>

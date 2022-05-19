@@ -54,7 +54,7 @@
 
                     @if (Context.User.Identity.IsAuthenticated == true)
                     {
-                        <img src="https://storageproyectoamh.blob.core.windows.net/users/@Context.User.FindFirst("Imagen").Value" style="border-radius:50%; width:5em;height:5em" />
+                        <img src="https://bucket-utopia-amh.s3.amazonaws.com/images/users/@Context.User.FindFirst("Imagen").Value" style="border-radius:50%; width:5em;height:5em" />
                         <li class="nav-item">
                             <a class="nav-link" asp-action="DetallesUsuario" asp-controller="Usuarios">@Context.User.Identity.Name</a>
                         </li>

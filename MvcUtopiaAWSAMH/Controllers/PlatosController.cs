@@ -46,11 +46,10 @@ namespace MvcUtopiaAWSAMH.Controllers
             plato.Foto = filename;
             await this.service.CrearPlatoAsync(plato, token);
 
-            //using (Stream stream = foto.OpenReadStream())
-            //{
-            //    await this.service.UploadBlobAsync("platos", filename, stream);
-
-            //}
+            using (Stream stream = foto.OpenReadStream())
+            {
+                await this.service.UploadFile(stream, foto.FileName, "platos");
+            }
             return RedirectToAction("Index", "Admin");
         }
 
@@ -59,7 +58,7 @@ namespace MvcUtopiaAWSAMH.Controllers
         {
             string token = HttpContext.User.FindFirst("TOKEN").Value;
             Plato plato = await this.service.FindPlatoAsync(idplato);
-            //await this.service.DeleteBlobAsync("platos", plato.Foto);
+            await this.service.DeleteFileAsync(plato.Foto, "platos");
             await this.service.DeletePlatoAsync(idplato, token);
             return RedirectToAction("Index", "Admin");
         }
@@ -74,18 +73,17 @@ namespace MvcUtopiaAWSAMH.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarPlato(Plato plato, IFormFile archivo)
         {
-            //await this.service.DeleteBlobAsync("platos", plato.Foto);
+            await this.service.DeleteFileAsync(plato.Foto, "platos");
 
             string filename = archivo.FileName;
             string token = HttpContext.User.FindFirst("TOKEN").Value;
             plato.Foto = filename;
             await this.service.UpdatePlatoAsync(plato, token);
 
-            //using (Stream stream = archivo.OpenReadStream())
-            //{
-            //    await this.service.UploadBlobAsync("platos", filename, stream);
-
-            //}
+            using (Stream stream = archivo.OpenReadStream())
+            {
+                await this.service.UploadFile(stream, archivo.FileName, "platos");
+            }
 
             return RedirectToAction("Index", "Admin");
         }

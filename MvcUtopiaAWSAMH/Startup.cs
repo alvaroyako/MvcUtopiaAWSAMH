@@ -1,3 +1,4 @@
+using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,12 +27,10 @@ namespace MvcUtopiaAWSAMH
         public void ConfigureServices(IServiceCollection services)
         {
             string urlApi = this.Configuration.GetValue<string>("ApiUrls:ApiUtopia");
+            string s3  = this.Configuration.GetValue<string>("AWS:AWSBucket");
             string CadenaCache = this.Configuration.GetConnectionString("CacheRedis");
 
-            //services.AddStackExchangeRedisCache(options =>
-            //{
-            //    options.Configuration = CadenaCache;
-            //});
+            
 
             services.AddAuthorization(options =>
             {
@@ -40,7 +39,10 @@ namespace MvcUtopiaAWSAMH
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            ServiceApiUtopia serviceApiUtopia = new ServiceApiUtopia(urlApi);
+            AmazonS3Client s3client = new AmazonS3Client();
+            services.AddAWSService<IAmazonS3>();
+            ServiceApiUtopia serviceApiUtopia = new ServiceApiUtopia(s3client,urlApi,s3);
+            
 
             services.AddTransient<ServiceApiUtopia>(x => serviceApiUtopia);
             services.AddDistributedMemoryCache();
@@ -60,6 +62,11 @@ namespace MvcUtopiaAWSAMH
                 {
                     config.AccessDeniedPath = "/Manage/ErrorAcceso";
                 });
+
+            //services.AddStackExchangeRedisCache(options =>
+            //{
+            //    options.Configuration = CadenaCache;
+            //});
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
         }
 

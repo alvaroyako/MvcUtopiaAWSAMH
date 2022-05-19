@@ -373,10 +373,10 @@ else
                     @foreach (Juego juego in Model)
                     {
                         <tr>
-                            <td><img style="width:100px;height:100px" src="https://storageproyectoamh.blob.core.windows.net/juegos/@juego.Foto"></td>
+                            <td><img style="width:100px;height:100px" src="https://bucket-utopia-amh.s3.amazonaws.com/images/juegos/@juego.Foto"></td>
                             <td>@juego.Nombre</td>
                             <td>@juego.Precio &euro;</td>
-                            <td><a asp-action="Carrito" asp-controller="Carrito" asp-route-id="@juego.IdJuego"><img src="https://storageproyectoamh.blob.core.windows.net/misc/bin.png"></a></td>
+                            <td><a asp-action="Carrito" asp-controller="Carrito" asp-route-id="@juego.IdJuego"><img src="https://bucket-utopia-amh.s3.amazonaws.com/images/misc/bin.png"></a></td>
                             @{
                                 suma += juego.Precio;
                             }

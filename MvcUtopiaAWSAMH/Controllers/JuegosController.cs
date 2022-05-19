@@ -48,11 +48,10 @@ namespace MvcUtopiaAWSAMH.Controllers
             juego.Foto = filename;
             await this.service.CrearJuegoAsync(juego, token);
 
-            //using (Stream stream = foto.OpenReadStream())
-            //{
-            //    await this.service.UploadBlobAsync("juegos", filename, stream);
-
-            //}
+            using (Stream stream = foto.OpenReadStream())
+            {
+                await this.service.UploadFile(stream, foto.FileName,"juegos");
+            }
             return RedirectToAction("Index", "Admin");
         }
 
@@ -61,7 +60,7 @@ namespace MvcUtopiaAWSAMH.Controllers
         {
             string token = HttpContext.User.FindFirst("TOKEN").Value;
             Juego juego = await this.service.FindJuegoAsync(idjuego);
-            //await this.service.DeleteBlobAsync("juegos", juego.Foto);
+            await this.service.DeleteFileAsync(juego.Foto, "juegos");
             await this.service.DeleteJuegoAsync(idjuego, token);
             return RedirectToAction("Index", "Admin");
         }
@@ -76,18 +75,17 @@ namespace MvcUtopiaAWSAMH.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarJuego(Juego juego, IFormFile archivo)
         {
-            //await this.service.DeleteBlobAsync("juegos", juego.Foto);
+            await this.service.DeleteFileAsync(juego.Foto,"juegos");
 
             string filename = archivo.FileName;
             string token = HttpContext.User.FindFirst("TOKEN").Value;
             juego.Foto = filename;
             await this.service.UpdateJuegoAsync(juego, token);
 
-            //using (Stream stream = archivo.OpenReadStream())
-            //{
-            //    await this.service.UploadBlobAsync("juegos", filename, stream);
-
-            //}
+            using (Stream stream = archivo.OpenReadStream())
+            {
+                await this.service.UploadFile(stream, archivo.FileName, "juegos");
+            }
 
             return RedirectToAction("Index", "Admin");
         }
