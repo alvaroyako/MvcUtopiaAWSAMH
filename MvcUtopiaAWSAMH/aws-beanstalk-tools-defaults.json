@@ -1,0 +1,20 @@
+
+{
+    "region" : "us-east-1",
+    "configuration" : "Debug",
+    "framework"     : "net5.0",
+    "self-contained" : false,
+    "application"    : "MvcUtopiaAWSAMH",
+    "environment"    : "MvcUtopiaAWSAMH-dev",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.3.1 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "mvcutopiaawsamh-dev",
+    "instance-type"        : "t2.micro",
+    "key-pair"             : "keys-linux-aws-web-server",
+    "instance-profile"     : "aws-elasticbeanstalk-MvcUtopiaAWSAMH-dev",
+    "service-role"         : "aws-elasticbeanstalk-service-role",
+    "proxy-server"         : "nginx"
+}

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MvcUtopiaAWSAMH.Controllers
@@ -93,9 +94,9 @@ namespace MvcUtopiaAWSAMH.Controllers
         [AuthorizeUsuarios]
         public IActionResult Favoritos()
         {
-            string idusu = HttpContext.Session.Id.ToString();
+            int idusuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
             List<Juego> favoritos =
-                this.service.GetFavorito(idusu);
+                this.service.GetFavorito(idusuario);
             if (favoritos == null)
             {
                 return View();
@@ -109,17 +110,17 @@ namespace MvcUtopiaAWSAMH.Controllers
         [AuthorizeUsuarios]
         public async Task<IActionResult> SeleccionarFavorito(int idjuego)
         {
-            string idusu = HttpContext.Session.Id.ToString();
+            int idusuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
             Juego favorito = await this.service.FindJuegoAsync(idjuego);
-            this.service.AddFavorito(favorito, idusu);
+            this.service.AddFavorito(favorito, idusuario);
             return RedirectToAction("Favoritos");
         }
 
         [AuthorizeUsuarios]
         public IActionResult EliminarFavorito(int idjuego)
         {
-            string idusu = HttpContext.Session.Id.ToString();
-            this.service.DeleteFavorito(idjuego, idusu);
+            int idusuario = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            this.service.DeleteFavorito(idjuego, idusuario);
             return RedirectToAction("Favoritos");
         }
 

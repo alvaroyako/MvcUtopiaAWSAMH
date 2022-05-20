@@ -28,7 +28,6 @@ namespace MvcUtopiaAWSAMH
         {
             string urlApi = this.Configuration.GetValue<string>("ApiUrls:ApiUtopia");
             string s3  = this.Configuration.GetValue<string>("AWS:AWSBucket");
-            string CadenaCache = this.Configuration.GetConnectionString("CacheRedis");
 
             
 

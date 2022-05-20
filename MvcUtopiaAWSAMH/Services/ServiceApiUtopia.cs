@@ -443,7 +443,7 @@ namespace MvcUtopiaAWSAMH.Services
         #endregion
 
         #region Cache Redis
-        public void AddFavorito(Juego juego, string idusu)
+        public void AddFavorito(Juego juego, int idusu)
             {
                 string jsonJuegos = this.database.StringGet("favoritos" + idusu);
                 List<Juego> favoritos;
@@ -464,7 +464,7 @@ namespace MvcUtopiaAWSAMH.Services
                 this.database.StringSet("favoritos" + idusu, jsonJuegos);
             }
 
-            public List<Juego> GetFavorito(string idusu)
+            public List<Juego> GetFavorito(int idusu)
             {
                 string jsonJuegos = this.database.StringGet("favoritos" + idusu);
                 if (jsonJuegos == null)
@@ -479,7 +479,7 @@ namespace MvcUtopiaAWSAMH.Services
                 }
             }
 
-            public void DeleteFavorito(int idJuego, string idusu)
+            public void DeleteFavorito(int idJuego, int idusu)
             {
                 string jsonJuegos = this.database.StringGet("favoritos" + idusu);
                 if (jsonJuegos != null)

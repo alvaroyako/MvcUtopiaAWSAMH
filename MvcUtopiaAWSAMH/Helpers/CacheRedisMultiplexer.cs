@@ -12,7 +12,7 @@ namespace MvcUtopiaAWSAMH.Helpers
         private static Lazy<ConnectionMultiplexer> CreateConnection =
             new Lazy<ConnectionMultiplexer>(() =>
             {
-                return ConnectionMultiplexer.Connect("cacheproyectoamh.redis.cache.windows.net:6380,password=GU8zwZyBfLRR42OcbBMBJEjA8KwPNf0uUAzCaD2XHWw=,ssl=True,abortConnect=False");
+                return ConnectionMultiplexer.Connect("cache-utopia-amh.5srfja.ng.0001.use1.cache.amazonaws.com:6379");
             });
 
         public static ConnectionMultiplexer GetConnection
