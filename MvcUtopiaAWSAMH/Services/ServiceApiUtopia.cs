@@ -526,27 +526,7 @@ namespace MvcUtopiaAWSAMH.Services
             }
             #endregion
 
-            #region Correos
-            public async Task SendMail(string email, string subject, string body)
-            {
-                string urlMail = "https://prod-28.westeurope.logic.azure.com:443/workflows/7d3ad3e4bdeb4900b2cfb03f9dc4d18b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YGTVz82lGFbkD_zNKHFO028sOGV4dEylzrIIlSaFLo4";
-                using (HttpClient client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(this.Header);
-                    EmailModel emailModel = new EmailModel
-                    {
-                        Email = email,
-                        Asunto = subject,
-                        Cuerpo = body
-                    };
-                    string json = JsonConvert.SerializeObject(emailModel);
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync(urlMail, content);
-
-                }
-            }
-            #endregion
+            
         }
     }
 

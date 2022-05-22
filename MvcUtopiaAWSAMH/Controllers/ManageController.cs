@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Amazon;
+using Amazon.SimpleEmail;
+using Amazon.SimpleEmail.Model;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +9,7 @@ using MvcUtopiaAWSAMH.Services;
 using NugetUtopia;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -36,15 +40,28 @@ namespace MvcUtopiaAWSAMH.Controllers
             int idusuario = await this.service.RegistrarUsuarioAsync(nombre, email, password, filename);
             filename = idusuario + "_" + filename;
 
-            //using (Stream stream = imagen.OpenReadStream())
-            //{
-            //    await this.service.UploadBlobAsync("users", filename, stream);
+            using (Stream stream = imagen.OpenReadStream())
+            {
+                await this.service.UploadFile(stream, filename, "users");
+            }
+            //string asunto = "Bienvenido a Utopia";
+            //string mensaje = "Hola " + nombre + ". Te mandamos este correo para informarte de que te has registrado con éxito en la página web de Utopía.";
 
-            //}
+            //var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.USEast1);
+            //Destination destination = new Destination();
+            //destination.ToAddresses = new List<string> { email };
+            //Message message = new Message();
+            //message.Subject = new Content(asunto);
+            //Body cuerpo = new Body();
+            //cuerpo.Html = new Content(mensaje);
+            //cuerpo.Text = new Content(mensaje);
+            //message.Body = cuerpo;
+            //SendEmailRequest request = new SendEmailRequest();
+            //request.Source = "alvaro.moya@tajamar365.com";
+            //request.Destination = destination;
+            //request.Message = message;
+            //SendEmailResponse response = await client.SendEmailAsync(request);
 
-            string asunto = "Bienvenido a Utopia";
-            string mensaje = "Hola " + nombre + ". Te mandamos este correo para informarte de que te has registrado con éxito en la página web de Utopía.";
-            await this.service.SendMail(email, asunto, mensaje);
 
             return RedirectToAction("GoToHome", "Home");
         }

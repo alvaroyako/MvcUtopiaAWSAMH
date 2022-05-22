@@ -11,10 +11,10 @@
     "additional-options"   : "",
     "solution-stack"       : "64bit Amazon Linux 2 v2.3.1 running .NET Core",
     "environment-type"     : "SingleInstance",
-    "cname"                : "mvcutopiaawsamh-dev",
+    "cname"                : "mvcutopiaawsamh",
     "instance-type"        : "t2.micro",
     "key-pair"             : "keys-linux-aws-web-server",
-    "instance-profile"     : "aws-elasticbeanstalk-MvcUtopiaAWSAMH-dev",
+    "instance-profile"     : "aws-elasticbeanstalk-MvcUtopiaAWSAMH-dev-0",
     "service-role"         : "aws-elasticbeanstalk-service-role",
     "proxy-server"         : "nginx"
 }

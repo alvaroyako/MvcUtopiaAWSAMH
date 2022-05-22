@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Amazon;
+using Amazon.SimpleEmail;
+using Amazon.SimpleEmail.Model;
+using Microsoft.AspNetCore.Mvc;
 using MvcUtopiaAWSAMH.Filters;
 using MvcUtopiaAWSAMH.Services;
 using NugetUtopia;
@@ -39,11 +42,25 @@ namespace MvcUtopiaAWSAMH.Controllers
             reserva.Hora = fecha.ToShortTimeString();
 
             await this.service.CrearReservaAsync(reserva);
-            string asunto = "Reserva Utopia";
-            string mensaje = "<p>Hola " + nombre + "! Los datos de tu reserva son los siguientes:</p> <p> Día: " + fecha.ToShortDateString() + "</p><p>Hora: " + fecha.ToShortTimeString() + "</p><p> Número de asistentes: " + personas + "</p><p> Teléfono de contacto: " + telefono + "</p><p> Recuerda enseñar este correo en el local para verificar la reserva.</p><p> Esperemos que pases un gran día en Utopia! </p>";
-            await this.service.SendMail(email, asunto, mensaje);
+            //string asunto = "Reserva Utopia";
+            //string mensaje = "<p>Hola " + nombre + "! Los datos de tu reserva son los siguientes:</p> <p> Día: " + fecha.ToShortDateString() + "</p><p>Hora: " + fecha.ToShortTimeString() + "</p><p> Número de asistentes: " + personas + "</p><p> Teléfono de contacto: " + telefono + "</p><p> Recuerda enseñar este correo en el local para verificar la reserva.</p><p> Esperemos que pases un gran día en Utopia! </p>";
 
-            ViewData["CORREO"] = "<div><p>Hemos enviado un correo al email proporcionado. Por favor revisa tu bandeja de entrada y en caso de no haber ningun mensaje, mira en la carpeta spam</p></div>";
+            //var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.USEast1);
+            //Destination destination = new Destination();
+            //destination.ToAddresses = new List<string> { email };
+            //Message message = new Message();
+            //message.Subject = new Content(asunto);
+            //Body cuerpo = new Body();
+            //cuerpo.Html = new Content(mensaje);
+            //cuerpo.Text = new Content(mensaje);
+            //message.Body = cuerpo;
+            //SendEmailRequest request = new SendEmailRequest();
+            //request.Source = "alvaro.moya@tajamar365.com";
+            //request.Destination = destination;
+            //request.Message = message;
+            //SendEmailResponse response = await client.SendEmailAsync(request);
+
+            //ViewData["CORREO"] = "<div><p>Hemos enviado un correo al email proporcionado. Por favor revisa tu bandeja de entrada y en caso de no haber ningun mensaje, mira en la carpeta spam</p></div>";
 
             return View();
         }
@@ -106,9 +123,23 @@ namespace MvcUtopiaAWSAMH.Controllers
             reserva.Hora = fecha.ToShortTimeString();
 
             await this.service.UpdateReservaAsync(reserva, token);
-            string asunto = "Reserva Utopia";
-            string mensaje = "Hola " + nombre + "! Hemos modificado tu reserva siendo este el resultado final:</p> <p> Día: " + fecha.ToShortDateString() + "</p><p>Hora: " + fecha.ToShortTimeString() + "</p><p> Número de asistentes: " + personas + "</p><p> Teléfono de contacto: " + telefono + "</p><p> Recuerda enseñar este nuevo correo en el local para verificar la reserva. Puedes eliminar el correo anterior si asi lo deseas</p><p> Esperemos que pases un gran día en Utopia! </p>";
-            await this.service.SendMail(email, asunto, mensaje);
+            //string asunto = "Reserva Utopia";
+            //string mensaje = "Hola " + nombre + "! Hemos modificado tu reserva siendo este el resultado final:</p> <p> Día: " + fecha.ToShortDateString() + "</p><p>Hora: " + fecha.ToShortTimeString() + "</p><p> Número de asistentes: " + personas + "</p><p> Teléfono de contacto: " + telefono + "</p><p> Recuerda enseñar este nuevo correo en el local para verificar la reserva. Puedes eliminar el correo anterior si asi lo deseas</p><p> Esperemos que pases un gran día en Utopia! </p>";
+
+            //var client = new AmazonSimpleEmailServiceClient(RegionEndpoint.USEast1);
+            //Destination destination = new Destination();
+            //destination.ToAddresses = new List<string> { email };
+            //Message message = new Message();
+            //message.Subject = new Content(asunto);
+            //Body cuerpo = new Body();
+            //cuerpo.Html = new Content(mensaje);
+            //cuerpo.Text = new Content(mensaje);
+            //message.Body = cuerpo;
+            //SendEmailRequest request = new SendEmailRequest();
+            //request.Source = "alvaro.moya@tajamar365.com";
+            //request.Destination = destination;
+            //request.Message = message;
+            //SendEmailResponse response = await client.SendEmailAsync(request);
 
             return RedirectToAction("Index", "Admin");
         }
