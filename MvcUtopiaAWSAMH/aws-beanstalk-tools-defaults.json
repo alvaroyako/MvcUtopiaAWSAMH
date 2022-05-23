@@ -13,8 +13,8 @@
     "environment-type"     : "SingleInstance",
     "cname"                : "mvcutopiaawsamh",
     "instance-type"        : "t2.micro",
-    "key-pair"             : "keys-linux-aws-web-server",
-    "instance-profile"     : "aws-elasticbeanstalk-MvcUtopiaAWSAMH-dev-0",
+    "key-pair"             : "par-claves-aula-tajamar",
+    "instance-profile"     : "aws-elasticbeanstalk-MvcUtopiaAWSAMH-dev-1",
     "service-role"         : "aws-elasticbeanstalk-service-role",
     "proxy-server"         : "nginx"
 }
